@@ -786,8 +786,6 @@ export default function InterviewPrep() {
     if (timerRef.current) clearInterval(timerRef.current);
 
     setIsRecording(false);
-    // eslint-disable-next-line
-    const duration = Math.floor((Date.now() - startTimeRef.current) / 1000);
     const metrics = getAverageMetrics();
 
     const finalTranscript = transcriptRef.current.trim() || transcript.trim();
