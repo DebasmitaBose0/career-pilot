@@ -28,7 +28,6 @@ const dotColor = isDark ? "#ffffff" : "#000000";
 
     try {
       const map = new DottedMap({ height: 100, grid: "diagonal" });
-      // eslint-disable-next-line
       cachedSvgMap = map.getSVG({
         radius: 0.22,
         color: dotColor,
