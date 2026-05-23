@@ -329,13 +329,15 @@ className="w-full pl-12 pr-10 py-4 bg-muted/50 border border-border rounded-xl t
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            role="status"
+            aria-live="polite"
             className="text-center py-20"
           >
             <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-10 h-10 text-muted-foreground/80" />
             </div>
             <h3 className="text-xl font-semibold text-foreground mb-2">No jobs found</h3>
-            <p className="text-muted-foreground mb-6">Try adjusting your search terms or filters</p>
+            <p className="text-muted-foreground mb-6">Try adjusting your search terms or filters to discover more relevant opportunities.</p>
             <Button variant="ghost" onClick={() => setHasSearched(false)}>
               Clear Search
             </Button>
