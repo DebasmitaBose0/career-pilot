@@ -11,6 +11,12 @@ npm install
 # Start development server
 npm run dev
 
+# Run the project in production preview mode
+npm run preview
+
+# Run linter to catch issues early
+npm run lint
+
 # Build for production
 npm run build
 ```
