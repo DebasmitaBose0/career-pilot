@@ -10,22 +10,26 @@ export default function FAB({ scrollContainerRef }) {
     {
       label: "Create Portfolio",
       icon: <FileText size={18} />,
-      onClick: () => console.log("Create Portfolio"),
+      onClick: () => setIsOpen(false),
+      title: "Coming soon: Create Portfolio",
     },
     {
       label: "Upload Resume",
       icon: <Briefcase size={18} />,
-      onClick: () => console.log("Upload Resume"),
+      onClick: () => setIsOpen(false),
+      title: "Coming soon: Upload Resume",
     },
     {
       label: "Search Jobs",
       icon: <Search size={18} />,
-      onClick: () => console.log("Search Jobs"),
+      onClick: () => setIsOpen(false),
+      title: "Coming soon: Search Jobs",
     },
     {
       label: "Start Interview",
       icon: <Mic size={18} />,
-      onClick: () => console.log("Start Interview"),
+      onClick: () => setIsOpen(false),
+      title: "Coming soon: Start Interview",
     },
   ];
 
