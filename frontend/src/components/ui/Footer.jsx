@@ -39,7 +39,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <div className="w-12 h-12 flex items-center justify-center">
-                <img src="/speed.png" alt="" className="w-full h-full object-contain" />
+                <img src="/speed.png" alt="CareerPilot brand mark" className="w-full h-full object-contain" />
               </div>
               <span className="text-xl font-bold text-white">careerpilot</span>
             </Link>
@@ -147,7 +147,7 @@ export default function Footer() {
               className="w-full md:w-72 px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/20"
             />
 
-            <button className="px-5 py-3 rounded-xl bg-white text-black font-medium hover:bg-zinc-200 transition shadow-sm">
+            <button aria-label="Subscribe to careerpilot updates" className="px-5 py-3 rounded-xl bg-white text-black font-medium hover:bg-zinc-200 transition shadow-sm">
               Subscribe
             </button>
           </div>
