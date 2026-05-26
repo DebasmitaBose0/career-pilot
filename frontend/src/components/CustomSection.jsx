@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import { cn } from '@/lib/utils'
 import Button from './Button'
 import DragHandle from './DragHandle'
+import { Trophy, FileText, GraduationCap, Handshake, Globe, Lightbulb, Mic, Zap, FolderOpen } from 'lucide-react'
 
 // ─── Icons (inline SVG to keep zero extra deps) ────────────────────────────
 
@@ -41,14 +42,14 @@ const ICONS = {
 // ─── Suggested section presets ─────────────────────────────────────────────
 
 const SECTION_PRESETS = [
-  { label: 'Awards & Honors',    icon: '🏆' },
-  { label: 'Publications',       icon: '📄' },
-  { label: 'Certifications',     icon: '🎓' },
-  { label: 'Volunteer Work',     icon: '🤝' },
-  { label: 'Languages',          icon: '🌐' },
-  { label: 'Patents',            icon: '💡' },
-  { label: 'Conferences',        icon: '🎤' },
-  { label: 'Hobbies & Interests',icon: '⚡' },
+  { label: 'Awards & Honors',    icon: Trophy },
+  { label: 'Publications',       icon: FileText },
+  { label: 'Certifications',     icon: GraduationCap },
+  { label: 'Volunteer Work',     icon: Handshake },
+  { label: 'Languages',          icon: Globe },
+  { label: 'Patents',            icon: Lightbulb },
+  { label: 'Conferences',        icon: Mic },
+  { label: 'Hobbies & Interests',icon: Zap },
 ]
 
 // ─── Entry default factory ─────────────────────────────────────────────────
@@ -476,21 +477,24 @@ function AddSectionPanel({ onAdd, onClose }) {
         <div>
           <p className="text-xs text-muted-foreground mb-2">Quick presets</p>
           <div className="flex flex-wrap gap-2">
-            {SECTION_PRESETS.map((p) => (
-              <button
-                key={p.label}
-                type="button"
-                onClick={() => submit(p.label)}
-                className={cn(
-                  'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium',
-                  'border border-border bg-muted/40 text-foreground',
-                  'hover:border-primary/60 hover:bg-primary/10 hover:text-primary transition-colors',
-                )}
-              >
-                <span>{p.icon}</span>
-                {p.label}
-              </button>
-            ))}
+                {SECTION_PRESETS.map((p) => {
+                  const PresetIcon = p.icon;
+                  return (
+                    <button
+                      key={p.label}
+                      type="button"
+                      onClick={() => submit(p.label)}
+                      className={cn(
+                        'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium',
+                        'border border-border bg-muted/40 text-foreground',
+                        'hover:border-primary/60 hover:bg-primary/10 hover:text-primary transition-colors',
+                      )}
+                    >
+                      <PresetIcon className="w-3.5 h-3.5" />
+                      {p.label}
+                    </button>
+                  );
+                })}
           </div>
         </div>
       </div>
@@ -585,7 +589,9 @@ export default function CustomSection({ sections = [], onSectionsChange }) {
       {/* Section list */}
       {sections.length === 0 && !showAddPanel && (
         <div className="flex flex-col items-center justify-center py-10 rounded-2xl border border-dashed border-border text-center">
-          <span className="text-3xl mb-2">📂</span>
+          <div className="w-14 h-14 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-3">
+            <FolderOpen className="w-7 h-7 text-muted-foreground/50" />
+          </div>
           <p className="text-sm text-muted-foreground">No custom sections yet.</p>
           <p className="text-xs text-muted-foreground mt-1">
             Click <strong>Add Section</strong> to get started.
