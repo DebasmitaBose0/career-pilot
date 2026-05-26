@@ -14,19 +14,28 @@ import {
   Search,
   X,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  LayoutList,
+  Briefcase,
+  Mic,
+  Lightbulb,
+  HelpCircle,
+  PartyPopper,
+  BookOpen,
+  MessageCircle,
+  FileText
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = [
-  { value: 'all', label: 'All Posts', icon: '📋' },
-  { value: 'experience', label: 'Experience', icon: '💼' },
-  { value: 'interview', label: 'Interview', icon: '🎤' },
-  { value: 'tips', label: 'Tips & Tricks', icon: '💡' },
-  { value: 'question', label: 'Questions', icon: '❓' },
-  { value: 'success-story', label: 'Success Stories', icon: '🎉' },
-  { value: 'resource', label: 'Resources', icon: '📚' },
-  { value: 'discussion', label: 'Discussion', icon: '💬' },
+  { value: 'all', label: 'All Posts', icon: LayoutList },
+  { value: 'experience', label: 'Experience', icon: Briefcase },
+  { value: 'interview', label: 'Interview', icon: Mic },
+  { value: 'tips', label: 'Tips & Tricks', icon: Lightbulb },
+  { value: 'question', label: 'Questions', icon: HelpCircle },
+  { value: 'success-story', label: 'Success Stories', icon: PartyPopper },
+  { value: 'resource', label: 'Resources', icon: BookOpen },
+  { value: 'discussion', label: 'Discussion', icon: MessageCircle },
 ];
 
 const containerVariants = {
@@ -359,7 +368,10 @@ export default function PostsFeed() {
                   : 'bg-muted text-muted-foreground hover:bg-muted/80'
               }`}
             >
-              <span>{cat.icon}</span>
+            {(() => {
+              const CatIcon = cat.icon;
+              return <CatIcon className="w-4 h-4" />;
+            })()}
               {cat.label}
             </button>
           ))}
@@ -472,7 +484,9 @@ export default function PostsFeed() {
             </>
           ) : (
             <div className="text-center py-12">
-              <p className="text-4xl mb-3">📝</p>
+            <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <FileText className="w-8 h-8 text-muted-foreground/50" />
+            </div>
               <h3 className="text-lg font-medium text-foreground">No posts yet</h3>
               <p className="text-muted-foreground mt-1">Be the first to share your thoughts!</p>
               <button
