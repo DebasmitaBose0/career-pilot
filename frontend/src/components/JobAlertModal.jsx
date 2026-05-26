@@ -85,7 +85,7 @@ export default function JobAlertModal({ isOpen, onClose, onSuccess, editAlert = 
                 toast.success('Alert updated successfully!');
             } else {
                 await jobAlertsApi.create(alertData);
-                toast.success('Job alert created! 🎉');
+                toast.success('Job alert created! You will be notified when new matches are found.');
             }
 
             onSuccess?.();

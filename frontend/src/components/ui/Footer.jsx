@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Zap, Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Zap, Github, Twitter, Linkedin, Instagram, CheckCircle2 } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -158,8 +158,9 @@ export default function Footer() {
 
           {/* Right input */}
           {status === "success" ? (
-            <div className="text-sm font-semibold text-emerald-400 py-3 px-4 bg-emerald-500/10 rounded-xl border border-emerald-500/20 shadow-sm">
-              🎉 Thanks for subscribing! Check your inbox soon.
+            <div className="flex items-center gap-2.5 text-sm font-semibold text-emerald-400 py-3 px-4 bg-emerald-500/10 rounded-xl border border-emerald-500/20 shadow-sm">
+              <CheckCircle2 className="w-4 h-4 shrink-0" />
+              Thanks for subscribing! Check your inbox soon.
             </div>
           ) : (
             <form onSubmit={handleSubscribe} className="flex w-full md:w-auto gap-3">
