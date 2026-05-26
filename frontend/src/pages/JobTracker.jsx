@@ -11,6 +11,12 @@ import {
   ExternalLink,
   Plus,
   Filter,
+  Bookmark,
+  Mail,
+  Mic,
+  PartyPopper,
+  XCircle,
+  BarChart2,
 } from "lucide-react";
 import Layout from "../components/Layout";
 import { jobTrackerApi } from "../services/api";
@@ -34,17 +40,42 @@ const JobTracker = () => {
       value: "saved",
       label: "Saved",
       color: "bg-muted-foreground",
-      icon: "📌",
+      icon: Bookmark,
+      iconColor: "text-slate-400",
+      iconBg: "bg-slate-400/10",
     },
-    { value: "applied", label: "Applied", color: "bg-blue-500", icon: "✉️" },
+    {
+      value: "applied",
+      label: "Applied",
+      color: "bg-blue-500",
+      icon: Mail,
+      iconColor: "text-blue-400",
+      iconBg: "bg-blue-400/10",
+    },
     {
       value: "interviewing",
       label: "Interviewing",
       color: "bg-yellow-500",
-      icon: "🎤",
+      icon: Mic,
+      iconColor: "text-yellow-400",
+      iconBg: "bg-yellow-400/10",
     },
-    { value: "offered", label: "Offered", color: "bg-green-500", icon: "🎉" },
-    { value: "rejected", label: "Rejected", color: "bg-red-500", icon: "❌" },
+    {
+      value: "offered",
+      label: "Offered",
+      color: "bg-green-500",
+      icon: PartyPopper,
+      iconColor: "text-green-400",
+      iconBg: "bg-green-400/10",
+    },
+    {
+      value: "rejected",
+      label: "Rejected",
+      color: "bg-red-500",
+      icon: XCircle,
+      iconColor: "text-red-400",
+      iconBg: "bg-red-400/10",
+    },
   ];
 
   useEffect(() => {
@@ -197,67 +228,25 @@ const JobTracker = () => {
           {/* Stats Cards */}
           {stats && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-              <Card className="p-6 bg-background/50 border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-muted-foreground text-sm mb-1">Total</p>
-                    <p className="text-3xl font-bold text-foreground">
-                      {stats.total}
-                    </p>
+              {[
+                { label: 'Total', value: stats.total, icon: BarChart2, iconColor: 'text-primary', iconBg: 'bg-primary/10' },
+                { label: 'Saved', value: stats.saved, icon: Bookmark, iconColor: 'text-slate-400', iconBg: 'bg-slate-400/10' },
+                { label: 'Applied', value: stats.applied, icon: Mail, iconColor: 'text-blue-400', iconBg: 'bg-blue-400/10' },
+                { label: 'Interviewing', value: stats.interviewing, icon: Mic, iconColor: 'text-yellow-400', iconBg: 'bg-yellow-400/10' },
+                { label: 'Offered', value: stats.offered, icon: PartyPopper, iconColor: 'text-green-400', iconBg: 'bg-green-400/10' },
+              ].map(({ label, value, icon: Icon, iconColor, iconBg }) => (
+                <Card key={label} className="p-6 bg-background/50 border-border hover:border-primary/30 transition-all group">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-muted-foreground text-sm mb-1">{label}</p>
+                      <p className="text-3xl font-bold text-foreground">{value}</p>
+                    </div>
+                    <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <Icon className={`w-6 h-6 ${iconColor}`} />
+                    </div>
                   </div>
-                  <div className="text-3xl">📊</div>
-                </div>
-              </Card>
-              <Card className="p-6 bg-background/50 border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-muted-foreground text-sm mb-1">Saved</p>
-                    <p className="text-3xl font-bold text-foreground">
-                      {stats.saved}
-                    </p>
-                  </div>
-                  <div className="text-3xl">📌</div>
-                </div>
-              </Card>
-              <Card className="p-6 bg-background/50 border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-muted-foreground text-sm mb-1">
-                      Applied
-                    </p>
-                    <p className="text-3xl font-bold text-foreground">
-                      {stats.applied}
-                    </p>
-                  </div>
-                  <div className="text-3xl">✉️</div>
-                </div>
-              </Card>
-              <Card className="p-6 bg-background/50 border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-muted-foreground text-sm mb-1">
-                      Interviewing
-                    </p>
-                    <p className="text-3xl font-bold text-foreground">
-                      {stats.interviewing}
-                    </p>
-                  </div>
-                  <div className="text-3xl">🎤</div>
-                </div>
-              </Card>
-              <Card className="p-6 bg-background/50 border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-muted-foreground text-sm mb-1">
-                      Offered
-                    </p>
-                    <p className="text-3xl font-bold text-foreground">
-                      {stats.offered}
-                    </p>
-                  </div>
-                  <div className="text-3xl">🎉</div>
-                </div>
-              </Card>
+                </Card>
+              ))}
             </div>
           )}
 
@@ -273,19 +262,22 @@ const JobTracker = () => {
             >
               All Columns
             </button>
-            {statusOptions.map((status) => (
-              <button
-                key={status.value}
-                onClick={() => setFilterStatus(status.value)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  filterStatus === status.value
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-foreground hover:bg-muted/80"
-                }`}
-              >
-                {status.icon} {status.label}
-              </button>
-            ))}
+            {statusOptions.map((status) => {
+              const StatusIcon = status.icon;
+              return (
+                <button
+                  key={status.value}
+                  onClick={() => setFilterStatus(status.value)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                    filterStatus === status.value
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground hover:bg-muted/80"
+                  }`}
+                >
+                  <StatusIcon className="w-4 h-4" /> {status.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* Kanban Board */}
@@ -320,7 +312,8 @@ const JobTracker = () => {
                     <div key={status.value} className="shrink-0 w-80 bg-muted/20 rounded-2xl p-4 flex flex-col snap-start border border-border/40 shadow-sm">
                       <div className="flex items-center justify-between mb-4 px-2">
                         <h3 className="font-bold flex items-center gap-2 text-foreground text-sm uppercase tracking-wider">
-                          <span>{status.icon}</span> {status.label}
+                          {(() => { const ColIcon = status.icon; return <ColIcon className={`w-4 h-4 ${status.iconColor}`} />; })()}
+                          {status.label}
                         </h3>
                         <span className="bg-background px-2.5 py-0.5 rounded-full text-xs font-black border border-border text-muted-foreground">
                           {columnJobs.length}
